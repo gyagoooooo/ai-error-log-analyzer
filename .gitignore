@@ -1,0 +1,84 @@
+# Python
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+
+venv/
+
+# Environment Variables
+
+.env
+.env.*
+!.env.example
+
+# IDE
+
+.vscode/
+.idea/
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+*.log
+logs/
+
+# Python Build
+
+build/
+dist/
+*.egg-info/
+
+# Pytest
+
+.pytest_cache/
+
+# Coverage
+
+.coverage
+htmlcov/
+
+# Local DB
+
+*.db
+*.sqlite3
+
+# Docker Volumes
+
+mysql_data/
+mariadb_data/
+redis_data/
+
+# Docker
+
+docker-data/
+*.tar
+
+# Docker Swarm Secrets
+
+secrets/
+
+# Cloudflare Tunnel
+
+.cloudflared/
+*.json
+
+# Node
+
+node_modules/
+
+# Backup
+
+*.bak
+*.swp
+
+# Temporary
+
+tmp/
+temp/

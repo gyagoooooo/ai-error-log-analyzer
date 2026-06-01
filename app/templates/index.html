@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Error Log Analyzer</title>
+
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="page">
+
+        <!-- 상단 헤더 -->
+        <header class="header">
+            <div>
+                <h1>AI Error Log Analyzer</h1>
+                <p>Docker, Nginx, DB, Redis 에러 로그를 AI가 분석합니다.</p>
+            </div>
+            <span class="badge">AI + Redis + Swarm</span>
+        </header>
+
+        <!-- 통계 카드 영역 -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span>총 분석 수</span>
+                <strong id="totalRequests">0</strong>
+            </div>
+            <div class="stat-card">
+                <span>Cache HIT</span>
+                <strong id="cacheHit">0</strong>
+            </div>
+            <div class="stat-card">
+                <span>Cache MISS</span>
+                <strong id="cacheMiss">0</strong>
+            </div>
+            <div class="stat-card">
+                <span>Hit Rate</span>
+                <strong id="cacheHitRate">0%</strong>
+            </div>
+        </section>
+
+        <!-- 메인 분석 영역 -->
+        <main class="main-grid">
+
+            <!-- 에러 입력 영역 -->
+            <section class="card input-card">
+                <h2>에러 코드 입력</h2>
+
+                <textarea
+                    id="errorLog"
+                    placeholder="에러 로그를 입력하세요.&#10;예: permission denied while trying to connect to the Docker daemon socket"
+                ></textarea>
+
+                <button id="analyzeBtn">분석하기</button>
+            </section>
+
+            <!-- 분석 결과 영역 -->
+            <section class="card result-card">
+                <h2>에러 코드 분석</h2>
+
+                <div class="meta">
+                    <span id="cacheStatus">Cache: -</span>
+                    <span id="serverName">Server: -</span>
+                </div>
+
+                <!-- Markdown 렌더링 결과 출력 -->
+                <div id="analysisResult" class="analysis-box">
+                    분석 결과가 여기에 표시됩니다.
+                </div>
+            </section>
+        </main>
+
+        <!-- 하단 영역 -->
+        <section class="bottom-grid">
+
+            <!-- 분석 히스토리 -->
+            <section class="card history-card">
+                <div class="section-title">
+                    <div>
+                        <h2>에러 분석 히스토리</h2>
+                        <p>나와 다른 사람들이 분석한 최근 에러 목록입니다.</p>
+                    </div>
+                    <button id="refreshBtn">새로고침</button>
+                </div>
+
+                <div id="historyList" class="history-list"></div>
+            </section>
+
+            <!-- 인기 에러 -->
+            <section class="card popular-card">
+                <h2>인기 에러 TOP 5</h2>
+                <p>가장 많이 분석된 에러 로그입니다.</p>
+
+                <div id="popularList" class="popular-list"></div>
+            </section>
+        </section>
+    </div>
+
+    <!-- Markdown 렌더링 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- 사용자 JS -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

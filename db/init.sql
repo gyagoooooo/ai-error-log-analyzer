@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS log_ai_db;
+USE log_ai_db;
+
+CREATE TABLE IF NOT EXISTS analysis_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    error_log TEXT NOT NULL,
+    analysis_result TEXT NOT NULL,
+    cache_hit BOOLEAN DEFAULT FALSE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

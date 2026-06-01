@@ -1,0 +1,56 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - log_net
+
+  app:
+    image: gyagoo/ai-log-analyzer:1.0
+    environment:
+      REDIS_HOST: redis
+      DB_HOST: mariadb
+      DB_USER: root
+      DB_PASSWORD: 1234
+      DB_NAME: log_ai_db
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 10s
+    networks:
+      - log_net
+
+  redis:
+    image: redis:latest
+    networks:
+      - log_net
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: 1234
+      MARIADB_DATABASE: log_ai_db
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - log_net
+
+configs:
+  nginx_conf:
+    file: ./nginx/default.conf
+
+volumes:
+  mariadb_data:
+
+networks:
+  log_net:
+    driver: overlay
